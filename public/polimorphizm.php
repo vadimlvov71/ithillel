@@ -2,6 +2,12 @@
 
 interface Calculate
 {
+    /**
+     * @param int $width
+     * @param int $height
+     * 
+     * @return string
+     */
     public function getArea(int $width, int $height): string;
 }
 
@@ -10,12 +16,19 @@ abstract class Figure implements Calculate
     protected int $width;
     protected int $height;
 
-    public function __construct($width = 100, $height= 100)
+    /**
+     * @param int $width
+     * @param int int
+     */
+    public function __construct(int $width = 0, int $height= 0)
     {
         $this->width = $width;
         $this->height = $height;
     }
-    protected function run()
+    /**
+     * @return void
+     */
+    protected function run(): void
     {
         $result = $this->getArea($this->width, $this->height);
     }
@@ -27,7 +40,7 @@ abstract class Figure implements Calculate
 }
 class Square extends Figure
 {
-    public function run()
+    public function run(): void
     {
         parent::run();
         $result = $this->getArea($this->width, $this->height);          
@@ -40,7 +53,10 @@ class Square extends Figure
 }
 class Rectangle extends Figure
 {
-    public function run()
+    /**
+     * @return void
+     */
+    public function run(): void
     {
         parent::run();
         $result = $this->getArea($this->width, $this->height);      
