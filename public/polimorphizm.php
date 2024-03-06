@@ -5,7 +5,7 @@ interface Calculate
     public function getArea(array $sides): string;
 }
 
-class Figure implements Calculate
+abstract class Figure implements Calculate
 {
    
     protected function run()
