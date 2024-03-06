@@ -48,7 +48,7 @@ class Rectangle extends Figure
     public function getArea(int $width, int $height): string
     {
         $result = $width * $height;
-        return (string) $result;
+        return $result;
     }
 }
 
