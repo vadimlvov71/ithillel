@@ -30,7 +30,6 @@ class Square extends Figure
         parent::run();
         $sides = [];
         $sides[] = 10;
-        $figure = "square";
         $result = $this->getArea($sides);
         
         echo 'Square result: ' . $result . PHP_EOL;        
@@ -49,7 +48,6 @@ class Rectangle extends Figure
         $sides = [];
         $sides[] = 10;
         $sides[] = 16;
-        $figure = "rectangle";
         $result = $this->getArea($sides);
         echo 'Rectangle result: ' . $result . PHP_EOL;        
     }
