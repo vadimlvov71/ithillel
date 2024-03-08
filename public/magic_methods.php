@@ -5,6 +5,18 @@ class Magic
     public int $number;
     private string $propety;
     private string $name;
+    static int $instances = 0;
+    public int $instance;
+
+    /**
+     * count of clned instances
+     * @return void
+     */
+    public function __clone(): void 
+    {
+        $this->instance = ++self::$instances;
+    }
+
     /**
      * @param string $arg
      * 
@@ -67,14 +79,18 @@ echo $magic->propety . PHP_EOL;
 echo "invoke: ". $magic("hello");
 echo "toString: ".$magic . PHP_EOL;
 
-$magic_clone = clone $magic;
-$magic_clone->number = 2; // no reference
+$magic_clone_one = clone $magic;
+$magic_clone_one->number = 2; // no reference
 
 $magic_copy = $magic;
 $magic_copy->number = 3; // reference
 
+echo "instance count: ".$magic_clone_one->instance . PHP_EOL;
+$magic_clone_two = clone $magic;
+echo "instance count: ".$magic_clone_two->instance . PHP_EOL;
+
 echo $magic->number . PHP_EOL;
-echo $magic_clone->number . PHP_EOL;
+echo $magic_clone_one->number . PHP_EOL;
 echo $magic_copy->number . PHP_EOL;
 
 
