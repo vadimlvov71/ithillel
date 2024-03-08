@@ -1,5 +1,5 @@
 <?php
-
+#[\AllowDynamicProperties]
 class Magic 
 {
     public int $number;
