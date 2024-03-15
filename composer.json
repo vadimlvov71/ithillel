@@ -1,0 +1,19 @@
+{
+    "name": "php/container",
+    "description": "That is a simple container service",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Vadim Podolyan",
+            "email": "vadim.podolyan@gmail.com"
+        }
+    ],
+    "require": {
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
