@@ -6,7 +6,8 @@ namespace App\Shortener\Service;
  */
 class FileHandler
 {
-    public function __construct( protected string $filename) {
+    public function __construct( protected string $filename)
+    {
         $this->filename = $filename;
     }
     public function setDataToFile(string $content): array
@@ -34,6 +35,7 @@ class FileHandler
     public function getDataFromFile(): array
     {  
         $result = [];
+        $result["message"] = "";
         if (is_writable($this->filename)) {
             if ($content = file_get_contents($this->filename)) {
                 $result['read_status'] = "success";
@@ -42,6 +44,8 @@ class FileHandler
             } else {
                 $result['error'] = "can`t open the file". $this->filename;
             }
+        } else {
+            $result['error'] = "permission denied file: ". $this->filename;
         }
     }
 }

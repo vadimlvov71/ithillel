@@ -5,16 +5,18 @@ namespace App\Shortener\Service;
 use App\Shortener\Interface\IUrlDecoder;
 use App\Shortener\Interface\IUrlEncoder;
 use App\Shortener\Validation\UrlValidation;
-use App\Shortener\Service\Helper;
+use App\Shortener\Service\FileHandler;
 
 class Shortener implements IUrlDecoder, IUrlEncoder
 {
+    public FileHandler $fileHandler;
     public function __construct(
         protected string $length,
         protected string $filename
     ) {
         $this->length = $length;
-        $this->filename = $filename;
+        //$this->filename = $filename;
+        $this->fileHandler = new FileHandler($filename);
     }
     
     public function encode(string $url): string
@@ -26,7 +28,7 @@ class Shortener implements IUrlDecoder, IUrlEncoder
     }
      public function decode(string $code): array
      {
-        $result = Helper::getDataFromFile($this->filename);
+        $result = $this->fileHandler->getDataFromFile($this->filename);
         
         $array = explode("=", $result["content"]);
         $result["url"] = $array[1];
@@ -46,7 +48,7 @@ class Shortener implements IUrlDecoder, IUrlEncoder
             $array = [];
             $array[$encode_url] = $url;
             $content = http_build_query($array, "####");
-            $result["file"] = Helper::setDataToFile($content, $this->filename);
+            $result["file"] = $this->fileHandler->setDataToFile($content, $this->filename);
             $result["message"] = Message::getMessage("encode", $encode_url);
             $result["status"] = "success";
             $result["code"] = $encode_url;
